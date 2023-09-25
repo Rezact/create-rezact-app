@@ -1,0 +1,26 @@
+{
+  "name": "create-rezact-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc && cp -rf ./templates ./dist"
+  },
+  "bin": {
+    "create-rezact-app": "dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.2",
+    "@types/node": "^20.6.3",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "commander": "^11.0.0",
+    "fast-glob": "^3.3.1",
+    "fs-extra": "^11.1.1",
+    "picocolors": "^1.0.0"
+  }
+}
