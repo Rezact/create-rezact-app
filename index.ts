@@ -7,7 +7,7 @@ import path from "path";
 import { cwd, argv } from "process";
 import fs from "fs";
 import fse from "fs-extra";
-import { checkDir } from "./helpers/check-dir";
+import { checkDirEmpty, checkDirExits } from "./helpers/check-dir";
 import { splitDir } from "./helpers/split-dir";
 
 let projectPath: string = "";
@@ -27,13 +27,30 @@ const program = new Commander.Command(packageJson.name)
 projectPath = path.resolve(cwd(), argv[2]);
 
 // copy folder from template to new folder
-console.log("Copying Project Files...");
+console.log("Creating New Rezact Project...");
 
 //check if dir exists
-const dirExist = checkDir({ pathName: projectPath });
+const dirExist = checkDirExits({ pathName: projectPath });
 
-if (!dirExist) {
-  fs.mkdirSync(projectPath);
+// if (!dirExist) {
+//   fs.mkdirSync(projectPath);
+// }
+
+if (dirExist) {
+  const compareAgainst = [
+    ".gitignore",
+    "index.html",
+    "package.json",
+    "tsconfig.json",
+    "vite.config.ts",
+  ];
+  const dirContent = checkDirEmpty({ pathName: projectPath });
+  compareAgainst.map((i) => {
+    if (dirContent.includes(i)) {
+      console.log("Please Choose another directory as this is not empty");
+      process.exit(1);
+    }
+  });
 }
 
 const templateDir = path.join(__dirname, "templates");

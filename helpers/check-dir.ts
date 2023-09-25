@@ -4,6 +4,10 @@ interface directory {
   pathName: string;
 }
 
-export const checkDir = (params: directory) => {
+export const checkDirExits = (params: directory) => {
   return fse.existsSync(params.pathName);
+};
+
+export const checkDirEmpty = (params: directory) => {
+  return fse.readdirSync(params.pathName);
 };
