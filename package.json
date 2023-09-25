@@ -1,6 +1,6 @@
 {
   "name": "@rezact/create-app",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Quickly Scaffold a Rezact App",
   "main": "index.js",
   "scripts": {

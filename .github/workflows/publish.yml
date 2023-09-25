@@ -26,6 +26,6 @@ jobs:
       run: npm run build # If you have a build script, run it here
     
     - name: Publish
-      run: npm publish
+      run: cd dist && npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
