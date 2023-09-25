@@ -1,17 +1,17 @@
 {
-  "name": "create-rezact-app",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@rezact/create-app",
+  "version": "1.0.5",
+  "description": "Quickly Scaffold a Rezact App",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && tsc && cp -rf ./templates ./dist"
+    "build": "rm -rf dist && tsc && cp -rf ./templates ./dist && cp ./README.md ./dist"
   },
   "bin": {
-    "create-rezact-app": "dist/index.js"
+    "create-rezact-app": "index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sambassey Nengimote",
+  "license": "MIT",
   "devDependencies": {
     "@types/fs-extra": "^11.0.2",
     "@types/node": "^20.6.3",

@@ -29,7 +29,8 @@ console.log("Copying Project Files...");
 
 fs.mkdirSync(projectPath);
 
-fse.copySync(`${cwd()}/templates/default`, projectPath);
+const templateDir = path.join(__dirname, 'templates');
+fse.copySync(`${templateDir}/default`, projectPath);
 
 //create packkage.json file
 const JsonPackage = `{
@@ -62,4 +63,4 @@ console.log("npm install");
 console.log();
 console.log("npm run dev");
 
-process.exit(1);
+process.exit(0);
