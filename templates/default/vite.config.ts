@@ -28,7 +28,7 @@ export default {
       pragma: "r.xCreateElement",
       pragmaFrag: "r.xFragment",
       jsxRuntime: "classic",
-      pragmaImportSource: "src/lib/rezact/mdx",
+      pragmaImportSource: "@rezact/rezact/mdx",
       remarkPlugins: [
         remarkFrontmatter,
         [remarkMdxFrontmatter, { name: "fm" }],
