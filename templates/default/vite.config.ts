@@ -26,7 +26,7 @@ export default {
   plugins: [
     mdx({
       pragma: "r.xCreateElement",
-      pragmafrag: "r.xFragment",
+      pragmaFrag: "r.xFragment",
       jsxRuntime: "classic",
       pragmaImportSource: "src/lib/rezact/mdx",
       remarkPlugins: [
