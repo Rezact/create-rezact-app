@@ -3,7 +3,7 @@
 ### Usage
 
 ```bash
-npm create @rezact/app@latest my-rezact-project
+npm create @rezact/app@latest 
 cd my-rezact-project
 npm install
 npm run dev
