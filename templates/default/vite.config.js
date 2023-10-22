@@ -1,4 +1,4 @@
-/**@type{import('vite').UserConfig} */
+/** @type {import('vite').UserConfig} */
 import { rezact } from "@rezact/rezact/vite-plugin";
 import { rezact_mdx } from "@rezact/rezact/vite-mdx-plugin";
 import remarkFrontmatter from "remark-frontmatter";
@@ -26,7 +26,7 @@ export default {
   plugins: [
     mdx({
       pragma: "r.xCreateElement",
-      pragmafrag: "r.xFragment",
+      pragmaFrag: "r.xFragment",
       jsxRuntime: "classic",
       pragmaImportSource: "src/lib/rezact/mdx",
       remarkPlugins: [

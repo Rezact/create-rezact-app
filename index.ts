@@ -1,28 +1,60 @@
 #!/usr/bin/env node
 
-import { green } from "picocolors";
-import packageJson from "./package.json";
-import Commander from "commander";
+import colors from "picocolors";
+import packageJson from "./package.json" assert { type: "json" };
+import { Command } from "commander";
 import path from "path";
 import { cwd, argv } from "process";
 import fs from "fs";
 import fse from "fs-extra";
-import { checkDirEmpty, checkDirExits } from "./helpers/check-dir";
-import { splitDir } from "./helpers/split-dir";
+import { checkDirEmpty, checkDirExits } from "./helpers/check-dir.js";
+import { splitDir } from "./helpers/split-dir.js";
+import { select } from "@inquirer/prompts";
 
 let projectPath: string = "";
 
-const handleExit = () => process.exit(1);
-
-process.on("SIGTERM", handleExit);
-process.on("SIGINT", handleExit);
-
-const program = new Commander.Command(packageJson.name)
+const program = new Command(packageJson.name)
   .version(packageJson.version)
-  .usage(`${green("<project-directory>")} [options]`)
+  .usage(`${colors.green("<project-directory>")} [options]`)
   .description("Command line utility used for creating new Rezact project")
   .argument("<project-directory>")
+  .option("-ts --typescript", "Use Typescript")
+  .option("-tw --tailwind", "Use tailwind as default styling")
   .parse(argv);
+
+const options = program.opts();
+//choose flavor
+console.log(options);
+//choose if tailwind or not
+
+const typescript = await select({
+  message: "Would you like to use Typescript?",
+  choices: [
+    {
+      name: "Yes",
+      value: true,
+    },
+    {
+      name: "No",
+      value: false,
+    },
+  ],
+});
+// const tailwind = await select({
+//   message: "Would you like to use Tailwind CSS for styling?",
+//   choices: [
+//     {
+//       name: "Yes",
+//       value: true,
+//     },
+//     {
+//       name: "No",
+//       value: false,
+//     },
+//   ],
+// });
+
+console.log(typescript);
 
 projectPath = path.resolve(cwd(), argv[2]);
 
@@ -36,25 +68,25 @@ const dirExist = checkDirExits({ pathName: projectPath });
 //   fs.mkdirSync(projectPath);
 // }
 
-if (dirExist) {
-  const compareAgainst = [
-    ".gitignore",
-    "index.html",
-    "package.json",
-    "tsconfig.json",
-    "vite.config.ts",
-  ];
-  const dirContent = checkDirEmpty({ pathName: projectPath });
-  compareAgainst.map((i) => {
-    if (dirContent.includes(i)) {
-      console.log("Please Choose another directory as this is not empty");
-      process.exit(1);
-    }
-  });
-}
+// if (dirExist) {
+//   const compareAgainst = [
+//     ".gitignore",
+//     "index.html",
+//     "package.json",
+//     "tsconfig.json",
+//     "vite.config.ts",
+//   ];
+//   const dirContent = checkDirEmpty({ pathName: projectPath });
+//   compareAgainst.map((i) => {
+//     if (dirContent.includes(i)) {
+//       console.log("Please Choose another directory as this is not empty");
+//       process.exit(1);
+//     }
+//   });
+// }
 
-const templateDir = path.join(__dirname, "templates");
-fse.copySync(`${templateDir}/default`, projectPath);
+// const templateDir = path.join(__dirname, "templates");
+// fse.copySync(`${templateDir}/default`, projectPath);
 
 const projectName = splitDir(projectPath);
 
@@ -78,7 +110,7 @@ const JsonPackage = `{
   }
 }
 `;
-fs.writeFileSync(`${projectPath}/package.json`, JsonPackage);
+//fs.writeFileSync(`${projectPath}/package.json`, JsonPackage);
 
 //console.log install instructions
 console.log(`${projectName} created!`);
@@ -88,5 +120,3 @@ console.log();
 console.log("npm install");
 console.log();
 console.log("npm run dev");
-
-//process.exit(0);
