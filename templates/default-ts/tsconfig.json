@@ -22,7 +22,14 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": "./",
+    "paths": {
+      "src/*": ["./src/*"],
+      "rezact": ["./node_modules/@rezact/rezact/index.js"],
+      "rezact/*": ["./node_modules/@rezact/rezact/*"]
+    }
   },
   "include": ["src"]
 }
